@@ -74,19 +74,69 @@ $functions = [
         }
     },
     "/exer6" => function($params)use ($metodo){
-
+        if($metodo == "POST"){
+            $n1 = (int) $_POST['n1'];
+            $n2 = (int) $_POST['n2'];
+            return $n1 > $n2 ? " $n2 $n1 " : ( $n2 > $n1 ? " $n1 $n2" : "Número ".$n2 .' iguais' ) ;
+        }else{
+            require_once __DIR__.'/src/view/6.html';
+        }
     },
     "/exer7" => function($params)use ($metodo){
-
+        if($metodo == "POST"){
+            $n1 = (int) $_POST['n1'];
+            return "$n1 metros, são ".(100*$n1).' centimetros';
+        }else{
+            require_once __DIR__.'/src/view/7.html';
+        }
     },
     "/exer8" => function($params)use ($metodo){
-
+        if($metodo == "POST"){
+            $n1 = (int) $_POST['n1'];
+            return (
+             function($qtdM2){
+                $qty_litros = $qtdM2 % 3 == 0 ? $qtdM2 / 3 : (int) ($qtdM2 / 3) +1;
+                $qtd_latas = $qty_litros % 18 == 0 ? $qty_litros/18 :  (int) ($qty_litros/18) + 1;
+                return 'Qtd Latas: '.$qtd_latas.'<br>'.
+                'Preço: R$'.$qtd_latas*80;
+                ;
+             }   
+            )($n1);
+        }else{
+            require_once __DIR__.'/src/view/8.html';
+        }
     },
     "/exer9" => function($params)use ($metodo){
-
+         define("YEAR", 2015);
+        if($metodo == "POST"){
+            $n1 = (int) $_POST['n1'];
+            return (
+                function($anonascimento, $referenceYear){
+                    $idade = $referenceYear-$anonascimento;
+                    $dias = $idade * 365;
+                    $future = 2025 - $anonascimento;
+                    return "
+                    Idade Atual: $idade <br>
+                    Dias Vividos: $dias <br>
+                    Idade no ano de 2025: $future <br>
+                    ";
+                }
+            )($n1, YEAR);
+        }else{
+            require_once __DIR__.'/src/view/9.html';
+        }
     },
     "/exer10" => function($params)use ($metodo){
-
+        if($metodo == "POST"){
+            require_once __DIR__.'/src/view/10.html';
+            $peso = (float) $_POST['peso'];
+            $altura = (float) $_POST['altura'];
+            $status = 'Bom';
+            $imc = $peso / ($altura*$altura);
+            return $imc < 18.5 ? 'Abaixo do Peso' : ( $imc > 34.9 ? 'Acima do Peso': 'Grau normal' );
+        }else{
+            require_once __DIR__.'/src/view/10.html';
+        }
     }
 ];
 #ROTAS
