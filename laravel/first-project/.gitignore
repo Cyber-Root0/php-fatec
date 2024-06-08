@@ -1,7 +1,4 @@
-/public/
-/resources/
 /tests/
-/storage/
 /.phpunit.cache
 /node_modules
 /public/build
